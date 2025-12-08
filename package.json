@@ -1,11 +1,28 @@
 {
   "name": "catbon",
   "version": "1.0.0",
-  "main": "main.js",
+  "description": "Electron + React + TypeScript app",
+  "main": "dist/main/main.js",
   "scripts": {
-    "start": "electron ."
+    "build": "npm run build:main && npm run build:renderer",
+    "dev": "vite",
+    "start": "cross-env NODE_ENV=production electron .",
+    "build:renderer": "vite build",
+    "build:main": "tsc -p tsconfig.main.json",
+    "electron:dev": "tsc -p tsconfig.main.json && electron ."
+  },
+  "dependencies": {
+    "electron": "^30.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "electron": "^39.2.4"
+    "typescript": "^5.6.3",
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/node": "^20.11.0",
+    "cross-env": "^7.0.3"
   }
 }
