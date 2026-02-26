@@ -1,28 +1,26 @@
 {
-  "name": "catbon",
+  "name": "catbon-monorepo",
   "version": "1.0.0",
-  "description": "Electron + React + TypeScript app",
-  "main": "dist/main/main.js",
+  "private": true,
+  "description": "Monorepo with Electron frontend, local backend & cloud backend",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
-    "build": "npm run build:main && npm run build:renderer",
-    "dev": "vite",
-    "start": "cross-env NODE_ENV=production electron .",
-    "build:renderer": "vite build",
-    "build:main": "tsc -p tsconfig.main.json",
-    "electron:dev": "tsc -p tsconfig.main.json && electron ."
-  },
-  "dependencies": {
-    "electron": "^30.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "dev": "npm run start:all",
+    "electron:dev": "npm run electron:dev -w @catbon/electron",
+    "backend:dev": "npm run dev -w @catbon/backend",
+    "start:all": "concurrently \"npm run backend:dev\" \"npm run electron:dev\"",
+    "build": "npm run build:electron && npm run build:backend && npm run build:shared",
+    "build:electron": "npm run build -w @catbon/electron",
+    "build:backend": "npm run build -w @catbon/backend",
+    "build:shared": "npm run build -w @catbon/shared",
+    "start:electron": "npm run start -w @catbon/electron",
+    "start:backend": "npm run start -w @catbon/backend"
   },
   "devDependencies": {
-    "typescript": "^5.6.3",
-    "vite": "^5.0.0",
-    "@vitejs/plugin-react": "^4.2.0",
-    "@types/react": "^18.2.0",
-    "@types/react-dom": "^18.2.0",
-    "@types/node": "^20.11.0",
-    "cross-env": "^7.0.3"
+    "concurrently": "^8.2.1",
+    "typescript": "^5.6.3"
   }
 }

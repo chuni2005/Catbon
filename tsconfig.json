@@ -10,8 +10,6 @@
     "resolveJsonModule": true,
     "types": ["vite/client"]
   },
-  "include": ["src"],
-  "vite": {
-    "assetsInclude": ["**/*.svg", "**/*.png", "**/*.jpg", "**/*.jpeg", "**/*.gif"]
-  }
+  "include": ["apps/**/src", "packages/**/src"],
+  "exclude": ["node_modules"]
 }
